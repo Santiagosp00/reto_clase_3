@@ -16,7 +16,7 @@ void setup() {
   size(640, 480);
   String[] cameras = Capture.list();
   printArray(cameras);
-  video = new Capture(this, cameras[0]);
+  video = new Capture(this, cameras[1]);
   video.start();
   prev = createImage(640, 480, RGB);
   // Start off tracking for red
