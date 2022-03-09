@@ -51,7 +51,7 @@ void setup() {
   println(width, height);
   String[] cameras = Capture.list();
   printArray(cameras);
-  video = new Capture(this, cameras[1]);
+  video = new Capture(this, cameras[0]);
   video.start();
   prev = createImage(640, 480, RGB);
 }
@@ -111,10 +111,6 @@ void draw() {
   rect(lerpX, lerpY, 120, 200);
   ellipse(lerpX,lerpY,12,12);
 
-  //image(video, 0, 0, 100, 100);
-  //image(prev, 100, 0, 100, 100);
-
-  //println(mouseX, threshold);
 }
 
 float distSq(float x1, float y1, float z1, float x2, float y2, float z2) {
@@ -138,6 +134,9 @@ class PegInHole extends PApplet {
   void setup() {
     pg1 = createGraphics(width, height);
     println(width, height);
+    drawFirstArm();
+    drawSecondArm();
+    drawPiece();
   }
 
   void setPG(PGraphics pg1) {
@@ -148,15 +147,11 @@ class PegInHole extends PApplet {
 
   void draw() {
 drawSurface();
-angle_1 = atan2(lerpY - 160, 150) - HALF_PI;
+angle_1 = atan2(2.5*lerpY - 260, 100)  - HALF_PI;
 drawFirstArm();
-angle_2 = atan2(320, lerpX - 200) - HALF_PI;
+angle_2 = atan2(300, 1.5*lerpX - 50) - HALF_PI;
 drawSecondArm();
 drawPiece();
-//s1x = (295 - 240*(1-cos(angle_1)) - 100*sin(angle_2));
-//s1y = (300 + 240*sin(angle_1) - 100*(1-cos(angle_2)));
-//rect(s1x,s1y,s1w+10,s1h+10);
-// if hit, change rectangle color
 boolean hit = rectRect(s1x,s1y,s1w,s1h, s2x,s2y,s2w,s2h);
 if (hit) {
   fill(255,150,0);
