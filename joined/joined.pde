@@ -146,29 +146,36 @@ class PegInHole extends PApplet {
   }
 
   void draw() {
-drawSurface();
-angle_1 = atan2(2.5*lerpY - 260, 100)  - HALF_PI;
-drawFirstArm();
-angle_2 = atan2(300, 1.5*lerpX - 50) - HALF_PI;
-drawSecondArm();
-drawPiece();
-boolean hit = rectRect(s1x,s1y,s1w,s1h, s2x,s2y,s2w,s2h);
-if (hit) {
-  fill(255,150,0);
-}
-else {
-  fill(173,216,230);
-}
-rect(s2x,s2y,s2w,s2h);
-rect(s3x,s3y,s3w,s3h);
-rect(s4x,s4y,s4w,s4h);
+    drawSurface();
+    
+    float num = sq(lerpX) + sq(lerpY) - sq(240) - sq(120);
+    float den = 2 * 240 * 120;
+    float angle_2 = acos(num / den);
+    
+    num = 120 * sin(angle_2);
+    den = sqrt(sq(lerpX) + sq(lerpY));
+    float angle_1 = atan(lerpY / lerpX) - asin(num / den);
+    angle_1 = angle_1;
+    drawFirstArm();
+    drawSecondArm();
+    drawPiece();
+    boolean hit = rectRect(s1x,s1y,s1w,s1h, s2x,s2y,s2w,s2h);
+    if (hit) {
+      fill(255,150,0);
+    }
+    else {
+      fill(173,216,230);
+    }
+    rect(s2x,s2y,s2w,s2h);
+    rect(s3x,s3y,s3w,s3h);
+    rect(s4x,s4y,s4w,s4h);
 
 }
 void drawSurface()
 {
-background(255);
-fill(173,216,230);
-noStroke();
+    background(255);
+    fill(173,216,230);
+    noStroke();
 
 }
 
